@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="siixsem_smtLocations_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="clearCurQty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="clearLocations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="params" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="deleteReels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getAllReels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getEvenReels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getMins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getOddReels" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="getReelsByLoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Loc" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="getSMKTLocations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="insert_reel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="item_id" Type="nvarchar" Mode="In" />
+          <Parameter Name="init_qty" Type="int" Mode="In" />
+          <Parameter Name="curr_qty" Type="int" Mode="In" />
+          <Parameter Name="expired" Type="int" Mode="In" />
+          <Parameter Name="location" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="updateItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="pn" Type="nvarchar" Mode="In" />
+          <Parameter Name="expired" Type="int" Mode="In" />
+          <Parameter Name="qty" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="siixsem_smtLocations_dbModelStoreContainer" />
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="siixsem_smtLocations_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="siixsem_smtLocations_dbEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="getSMKTLocations" ReturnType="Collection(siixsem_smtLocations_dbModel.getSMKTLocations_Result)" />
+          <FunctionImport Name="clearCurQty" />
+          <FunctionImport Name="updateItem">
+            <Parameter Name="pn" Mode="In" Type="String" />
+            <Parameter Name="expired" Mode="In" Type="Int32" />
+            <Parameter Name="qty" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="deleteReels" />
+          <FunctionImport Name="getReelsByLoc" ReturnType="Collection(siixsem_smtLocations_dbModel.getReelsByLoc_Result)">
+          <Parameter Name="Loc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="insert_reel" ReturnType="Collection(Int32)">
+            <Parameter Name="item_id" Mode="In" Type="String" />
+            <Parameter Name="init_qty" Mode="In" Type="Int32" />
+            <Parameter Name="curr_qty" Mode="In" Type="Int32" />
+            <Parameter Name="expired" Mode="In" Type="Int32" />
+            <Parameter Name="location" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="clearLocations">
+          <Parameter Name="params" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="getEvenReels" ReturnType="Collection(siixsem_smtLocations_dbModel.getEvenReels_Result)" />
+          <FunctionImport Name="getOddReels" ReturnType="Collection(siixsem_smtLocations_dbModel.getOddReels_Result)" />
+          <FunctionImport Name="getAllReels" ReturnType="Collection(siixsem_smtLocations_dbModel.getAllReels_Result)" />
+          <FunctionImport Name="getMins" ReturnType="Collection(siixsem_smtLocations_dbModel.getMins_Result)" />
+        </EntityContainer>
+        <ComplexType Name="getSMKTLocations_Result">
+          <Property Type="String" Name="TABLE_NAME" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="REEL_SIZE" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="PART_NUMBER" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="MAX_QTY" Nullable="false" />
+          <Property Type="Int32" Name="CURRENT_QTY" Nullable="false" />
+          <Property Type="String" Name="LOCATION" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="EXPIRED" Nullable="false" />
+          <Property Type="DateTime" Name="LAST_UPDATE" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="getReelsByLoc_Result">
+          <Property Type="String" Name="ITEM_ID" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="INIT_QTY" Nullable="false" />
+          <Property Type="Int32" Name="CURR_QTY" Nullable="false" />
+          <Property Type="Int32" Name="EXPIRED" Nullable="false" />
+          <Property Type="String" Name="LOCATION" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="getEvenReels_Result">
+          <Property Type="String" Name="PART_NUMBER" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="QTY_PICK" Nullable="true" />
+          <Property Type="String" Name="MESA" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="getOddReels_Result">
+          <Property Type="String" Name="PART_NUMBER" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="QTY_PICK" Nullable="true" />
+          <Property Type="String" Name="MESA" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="getAllReels_Result">
+          <Property Type="String" Name="PART_NUMBER" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="QTY_PICK" Nullable="true" />
+          <Property Type="String" Name="MESA" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="REEL_SIZE" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="getMins_Result">
+          <Property Type="String" Name="MESA" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="REEL_SIZE" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="PART_NUMBER" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="CURRENT_QTY" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="siixsem_smtLocations_dbModelStoreContainer" CdmEntityContainer="siixsem_smtLocations_dbEntities" >
+          <FunctionImportMapping FunctionImportName="getSMKTLocations" FunctionName="siixsem_smtLocations_dbModel.Store.getSMKTLocations">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="siixsem_smtLocations_dbModel.getSMKTLocations_Result">
+                <ScalarProperty Name="TABLE_NAME" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="REEL_SIZE" ColumnName="REEL_SIZE" />
+                <ScalarProperty Name="PART_NUMBER" ColumnName="PART_NUMBER" />
+                <ScalarProperty Name="MAX_QTY" ColumnName="MAX_QTY" />
+                <ScalarProperty Name="CURRENT_QTY" ColumnName="CURRENT_QTY" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="EXPIRED" ColumnName="EXPIRED" />
+                <ScalarProperty Name="LAST_UPDATE" ColumnName="LAST_UPDATE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="clearCurQty" FunctionName="siixsem_smtLocations_dbModel.Store.clearCurQty" />
+          <FunctionImportMapping FunctionImportName="updateItem" FunctionName="siixsem_smtLocations_dbModel.Store.updateItem" />
+          <FunctionImportMapping FunctionImportName="deleteReels" FunctionName="siixsem_smtLocations_dbModel.Store.deleteReels" />
+          <FunctionImportMapping FunctionImportName="getReelsByLoc" FunctionName="siixsem_smtLocations_dbModel.Store.getReelsByLoc">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="siixsem_smtLocations_dbModel.getReelsByLoc_Result">
+                <ScalarProperty Name="ITEM_ID" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="INIT_QTY" ColumnName="INIT_QTY" />
+                <ScalarProperty Name="CURR_QTY" ColumnName="CURR_QTY" />
+                <ScalarProperty Name="EXPIRED" ColumnName="EXPIRED" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="insert_reel" FunctionName="siixsem_smtLocations_dbModel.Store.insert_reel" />
+          <FunctionImportMapping FunctionImportName="clearLocations" FunctionName="siixsem_smtLocations_dbModel.Store.clearLocations" />
+          <FunctionImportMapping FunctionImportName="getEvenReels" FunctionName="siixsem_smtLocations_dbModel.Store.getEvenReels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="siixsem_smtLocations_dbModel.getEvenReels_Result">
+                <ScalarProperty Name="PART_NUMBER" ColumnName="PART_NUMBER" />
+                <ScalarProperty Name="QTY_PICK" ColumnName="QTY_PICK" />
+                <ScalarProperty Name="MESA" ColumnName="MESA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getOddReels" FunctionName="siixsem_smtLocations_dbModel.Store.getOddReels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="siixsem_smtLocations_dbModel.getOddReels_Result">
+                <ScalarProperty Name="PART_NUMBER" ColumnName="PART_NUMBER" />
+                <ScalarProperty Name="QTY_PICK" ColumnName="QTY_PICK" />
+                <ScalarProperty Name="MESA" ColumnName="MESA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getAllReels" FunctionName="siixsem_smtLocations_dbModel.Store.getAllReels">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="siixsem_smtLocations_dbModel.getAllReels_Result">
+                <ScalarProperty Name="PART_NUMBER" ColumnName="PART_NUMBER" />
+                <ScalarProperty Name="QTY_PICK" ColumnName="QTY_PICK" />
+                <ScalarProperty Name="MESA" ColumnName="MESA" />
+                <ScalarProperty Name="REEL_SIZE" ColumnName="REEL_SIZE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getMins" FunctionName="siixsem_smtLocations_dbModel.Store.getMins">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="siixsem_smtLocations_dbModel.getMins_Result">
+                <ScalarProperty Name="MESA" ColumnName="MESA" />
+                <ScalarProperty Name="REEL_SIZE" ColumnName="REEL_SIZE" />
+                <ScalarProperty Name="PART_NUMBER" ColumnName="PART_NUMBER" />
+                <ScalarProperty Name="CURRENT_QTY" ColumnName="CURRENT_QTY" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
